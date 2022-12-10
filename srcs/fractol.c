@@ -6,7 +6,7 @@
 /*   By: snaji <snaji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 20:17:55 by snaji             #+#    #+#             */
-/*   Updated: 2022/12/09 23:51:42 by snaji            ###   ########.fr       */
+/*   Updated: 2022/12/10 04:10:45 by snaji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,14 @@
 
 int	main(void)
 {
-	void	*mlx;
-	void	*window;
+	t_info	info;
 	t_image	frame;
 
-	mlx = mlx_init();
-	window = mlx_new_window(mlx, W, H, "Fract-ol");
-	frame = new_frame(mlx);
-	for (size_t i = 0; i < W; i++)
-		put_pixel_to_frame(&frame, i, 200, trgb(0, 255, 0, 0));
-	mlx_put_image_to_window(mlx, window, frame.img, 0, 0);
-	mlx_loop(mlx);
+	info.mlx_ptr = mlx_init();
+	info.window_ptr = mlx_new_window(info.mlx_ptr, W, H, "Fract-ol");
+	frame = julia(info, 1);
+	mlx_put_image_to_window(info.mlx_ptr, info.window_ptr, frame.img, 0, 0);
+	mlx_loop(info.mlx_ptr);
 	
 	return (0);
 }
